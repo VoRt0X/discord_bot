@@ -10,25 +10,7 @@ Also the Discord Server has 2 roles that i will name "specific roles" in the fil
 In the script they are the "Red Card" & "Yellow Card" roles.
 More information see below at "Card System"
 
-# Informations to the functions of the bot
-
-What i mean with the functions are the things the bot is able to do.
-Here is a list of everything:
-
-- displays the count of members on the server
-- logging when someone leaves or joins the server
-- displays the count of members with a specific role
-- recognizes when someone gets a role of 2 specific ones, logs that & writes that in a json file
-- deletes the role of the 2 when the timestamp is over 1 week old
-- can create channels by command
-  -> the creator will geht moved in the channel he created
-  -> at the text version of the creation you can mention some user that also should be moved to the new channel
-- can craete channels by reactions
-- can search member that are playing a specific game by command
-- can send infos of a user per message by command
-- can give/remove roles by reaction
-- can clear the messages in a channel
-- displays how many players are currently playing a specific game
+In te bot_versions file, you can see what changed from one version to another, i would recommend you to have a look in there.
 
 # Card System
 
