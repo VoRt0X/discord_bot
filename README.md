@@ -16,7 +16,7 @@ What i mean with the functions are the things the bot is able to do.
 Here is a list of everything:
 
 -------------------------------------------------------------------
-                                                        V 1.0
+                                                                V 1.0
 -------------------------------------------------------------------
 - displays the count of members on the server
 - logging when someone leaves or joins the server
