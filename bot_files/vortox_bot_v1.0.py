@@ -19,11 +19,11 @@ read_message_history = True
 bot = commands.Bot(command_prefix='>', intents=intents)
 
 #Setting the global Variables
-c_channel_msg_id = 996482769578360942
+c_channel_msg_id = 996482769578360942 #Its the message id of the main message on that people react to create a channel
 guild = bot.get_guild(771495836701425725)
 
 
-Token = ''
+Token = 'YOUR TOKEN HERE'
 bot_version_info = "Running on Version 1.0"
 
 logging.basicConfig(filename='Logging.log', encoding='utf-8', level=logging.WARNING)
