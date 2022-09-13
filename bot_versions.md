@@ -34,3 +34,20 @@ Here is a list of everything:
 
 i started to implement a new feature that should "track" if a member is active
   -> it will give a active member the role active and when he doesnt do anyhting for a specific time the role will be removed
+
+
+-------------------------------------------------------------------
+                                                                 V 2.0
+-------------------------------------------------------------------
+
+# New features
+
+- implemented the "active" role
+	-> you get it when you do a activity like writing a message or joining/leaving a channel
+	-> it will be removed after 14 days
+	-> all saved in a json file
+
+
+# Bug fixes
+
+- Stats for Rainbow didnt work quite well, because it had some issues i would say with the variable "guild", i now declared it directly in front of the call and not as a global variable
