@@ -51,3 +51,12 @@ i started to implement a new feature that should "track" if a member is active
 # Bug fixes
 
 - Stats for Rainbow didnt work quite well, because it had some issues i would say with the variable "guild", i now declared it directly in front of the call and not as a global variable
+
+
+-------------------------------------------------------------------
+                                                                 V 2.1
+-------------------------------------------------------------------
+
+# New
+
+- Simpliefied the Creation of a Channel
