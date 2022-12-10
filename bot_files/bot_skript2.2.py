@@ -23,8 +23,8 @@ c_channel_msg_id = 996482769578360942
 guild = bot.get_guild(771495836701425725)
 
 
-Token = ''
-bot_version_info = "Running on Version 2.1"
+Token = 'OTQ3OTYzMzMyMDcyMTkwMDEy.GhVlPo.sz8izjMy3c_7b-yLSFpNQdONXCOa-rlCIF7JHQ'
+bot_version_info = "Running on Version 2.2"
 
 logging.basicConfig(filename='Logging.log', encoding='utf-8', level=logging.WARNING)
 
@@ -535,7 +535,9 @@ async def on_member_update(before: discord.Member, after: discord.Member):
                     user = await bot.fetch_user(id_changed_user)
                     await user.send("Hello there,\nCongrats!! Your Red Card got removed!")
 
-    # Did the activity change?
+# Activity Tracking
+@bot.event
+async def on_presence_update(before, after):
     if before.activity != after.activity:
 
         if before.activity:
@@ -613,7 +615,7 @@ async def on_ready():
                 member_id = int(f"{data1['timers'][content]['member_id']}")
 
                 # Defining the Variables
-                bot.get_guild(771495836701425725)
+                guild = bot.get_guild(771495836701425725)
                 role = guild.get_role(947898505744232488)
                 member = await guild.fetch_member(member_id)
 
@@ -864,7 +866,7 @@ async def on_raw_reaction_add(payload):
             if not payload.user_id == 947963332072190012:
 
                 #Setting the variable for the channel max users
-                emoji_str = str(payload.emoji)
+                emoji_str = payload.emoji.name
                 channel_max = 0
                 if emoji_str == "1️⃣":
                     channel_max = 1
@@ -923,8 +925,7 @@ async def on_raw_reaction_add(payload):
                 channel = bot.get_channel(payload.channel_id)
                 message = await channel.fetch_message(payload.message_id)
                 user = await bot.fetch_user(payload.user_id)
-                emoji = bot.get_emoji(emoji_str)
-                await message.remove_reaction(emoji, user)
+                await message.remove_reaction(emoji=payload.emoji, member=user)
 
 
 # Reaction Roles remove

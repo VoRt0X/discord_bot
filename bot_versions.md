@@ -60,3 +60,11 @@ i started to implement a new feature that should "track" if a member is active
 # New
 
 - Simpliefied the Creation of a Channel
+
+-------------------------------------------------------------------
+                                                                 V 2.2
+-------------------------------------------------------------------
+
+# Bug fixes
+
+- Fixed the not working Activity Check on who is playing r6
