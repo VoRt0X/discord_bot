@@ -23,7 +23,7 @@ c_channel_msg_id = 996482769578360942
 guild = bot.get_guild(771495836701425725)
 
 
-Token = 'OTQ3OTYzMzMyMDcyMTkwMDEy.GhVlPo.sz8izjMy3c_7b-yLSFpNQdONXCOa-rlCIF7JHQ'
+Token = ''
 bot_version_info = "Running on Version 2.2"
 
 logging.basicConfig(filename='Logging.log', encoding='utf-8', level=logging.WARNING)
