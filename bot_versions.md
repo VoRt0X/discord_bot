@@ -68,3 +68,11 @@ i started to implement a new feature that should "track" if a member is active
 # Bug fixes
 
 - Fixed the not working Activity Check on who is playing r6
+
+-------------------------------------------------------------------
+                                                                 V 2.3
+-------------------------------------------------------------------
+
+# New feature
+
+- Now only the Member with the "Active User" Role are getting tracked for the active rainbow playing stat

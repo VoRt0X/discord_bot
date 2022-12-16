@@ -24,7 +24,7 @@ guild = bot.get_guild(771495836701425725)
 
 
 Token = ''
-bot_version_info = "Running on Version 2.2"
+bot_version_info = "Running on Version 2.3"
 
 logging.basicConfig(filename='Logging.log', encoding='utf-8', level=logging.WARNING)
 
@@ -539,46 +539,37 @@ async def on_member_update(before: discord.Member, after: discord.Member):
 @bot.event
 async def on_presence_update(before, after):
     if before.activity != after.activity:
-
         if before.activity:
             bfactivity_str = str(before.activity.name)
             bfactivity_lw = bfactivity_str.lower()
+            afactivity_lw = "None"
 
-            if bfactivity_lw == "rainbow six siege":
-                # Stats for Rainbow
-                gamers = []
-                game = "rainbow six siege"
-                guild = bot.get_guild(771495836701425725)
-                for member in guild.members:
-                    for act in member.activities:
-                        if act.type is discord.ActivityType.playing and act.name.lower() == game:
-                            gamers.append(f"{member.id}")
-
-                stats_channel = await bot.fetch_channel(971830717292101722)
-                new_count = len(gamers)
-
-                # Setting new stats
-                await stats_channel.edit(name=f"\U0001F4CA Currently Playing: {new_count}")
-
-        if after.activity:
+        elif after.activity:
             afactivity_str = str(after.activity.name)
             afactivity_lw = afactivity_str.lower()
-            if afactivity_lw == "rainbow six siege":
-                # Stats for Rainbow
+            bfactivity_lw = "None"
 
-                gamers = []
-                game = "rainbow six siege"
-                guild = bot.get_guild(771495836701425725)
-                for member in guild.members:
-                    for act in member.activities:
-                        if act.type is discord.ActivityType.playing and act.name.lower() == game:
-                            gamers.append(f"{member.id}")
+        #print(afactivity_lw)
+        #print(bfactivity_lw)
 
-                stats_channel = await bot.fetch_channel(971830717292101722)
-                new_count = len(gamers)
+        if afactivity_lw == "rainbow six siege" or bfactivity_lw == "rainbow six siege":
+            # Getting count of Active User that are playing R6
+            gamers = []
+            game = "rainbow six siege"
+            guild = bot.get_guild(771495836701425725)
+            for member in guild.members:
+                for act in member.activities:
+                    if act.type is discord.ActivityType.playing and act.name.lower() == game:
+                        for role in member.roles:
+                            if role == "Active User":
+                                gamers.append(member.id)
+                                break
 
-                # Setting new stats
-                await stats_channel.edit(name=f"\U0001F4CA Currently Playing: {new_count}")
+            stats_channel = await bot.fetch_channel(971830717292101722)
+            new_count = len(gamers)
+
+            # Setting new stats
+            await stats_channel.edit(name=f"\U0001F4CA Playing Siege: {new_count}")
 
 
 # State setting, Card Check, Active Check

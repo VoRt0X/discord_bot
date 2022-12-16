@@ -9,4 +9,4 @@ RUN python3 -m pip install -U discord.py
 CMD ["ls"]
 CMD ["pip list | grep discord.py"]
 
-CMD ["python3.10", "Bot Skript2.1.py"]
+CMD ["python3.10", "bot_skript(Version).py"]
