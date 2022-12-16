@@ -561,7 +561,8 @@ async def on_presence_update(before, after):
                 for act in member.activities:
                     if act.type is discord.ActivityType.playing and act.name.lower() == game:
                         for role in member.roles:
-                            if role == "Active User":
+                            role_name = role.name
+                            if role_name == "Active User":
                                 gamers.append(member.id)
                                 break
 
