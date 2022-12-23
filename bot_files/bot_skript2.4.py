@@ -18,15 +18,19 @@ add_reaction = True
 read_message_history = True
 bot = commands.Bot(command_prefix='>', intents=intents)
 
-#Setting the global Variables
-c_channel_msg_id = 996482769578360942
-guild = bot.get_guild(771495836701425725)
+
 
 
 Token = ''
-bot_version_info = "Running on Version 2.3"
+bot_version_info = "Running on Version 2.4"
 
 logging.basicConfig(filename='Logging.log', encoding='utf-8', level=logging.WARNING)
+
+
+# Setting the global Variables
+def wait_until_ready():
+    c_channel_msg_id = 996482769578360942
+    guild = bot.get_guild(771495836701425725)
 
 def check_active_file(member_id):
     with open("/home/pi/discordbot/active_member.json", "r") as f:
@@ -291,8 +295,6 @@ async def on_message(message):
             await member.add_roles(role)
 
 
-
-
 # Checking the channels
 @bot.event
 async def on_voice_state_update(member, before, after):
@@ -388,7 +390,7 @@ async def on_member_update(before: discord.Member, after: discord.Member):
 
 
             # Writing & Logging the Role update
-            dump(title1, json_object, "/home/pi/discordbot/Yellow Card.json")
+            dump(title1, json_object, "/home/pi/discordbot/yellow_card.json")
             logging.log(level=60, msg=f"{before} got a Yellow Card at {date_time}")
 
             # Sending the User a Info
@@ -404,14 +406,14 @@ async def on_member_update(before: discord.Member, after: discord.Member):
             date_time = datetime.now().strftime("%m/%d/%Y, %H:%M")
 
             # Informations saved as a Variable
-            filename2 = "Red Card.json"
+            filename2 = "red_card.json"
             title2 = f"{before}"
             json_object2 = {"date": f"{date_time}", "name": f"{change[0].name}", "role_id": f"{change[0].id}",
                             "member_name": f"{before}", "member_id": f"{before.id}"}
 
 
             # Writing & Logging the Role update
-            dump(title2, json_object2, "/home/pi/discordbot/Red Card.json")
+            dump(title2, json_object2, "/home/pi/discordbot/red_card.json")
             logging.log(level=60, msg=f"{before} got a Red Card at {date_time}")
 
             # Sending the User a Info
@@ -460,7 +462,7 @@ async def on_member_update(before: discord.Member, after: discord.Member):
 
         # Yellow Card?
         if {change[0].id} == {947898505744232488}:
-            with open('Yellow Card.json', 'r') as f:
+            with open('/home/pi/discordbot/yellow_card.json', 'r') as f:
                 data1 = json.load(f)
 
             # Checking every entry in the file
@@ -474,12 +476,12 @@ async def on_member_update(before: discord.Member, after: discord.Member):
                 if member_id_json == id_changed_user:
 
                     # Deleting the entry
-                    with open("Yellow Card.json", "r") as f:
+                    with open("yellow_card.json", "r") as f:
                         data = json.load(f)
 
                         data["timers"].pop(f"{data1['timers'][content]['member_name']}")
 
-                    with open("Yellow Card.json", "w") as f:
+                    with open("yellow_card.json", "w") as f:
                         json.dump(data, f, indent=2)
 
                     date_time = datetime.now().strftime("%m/%d/%Y, %H:%M")
@@ -506,7 +508,7 @@ async def on_member_update(before: discord.Member, after: discord.Member):
 
         # Red Card?
         if {change[0].id} == {946391448343945336}:
-            with open('/home/pi/discordbot/Red Card.json', 'r') as f:
+            with open('/home/pi/discordbot/red_card.json', 'r') as f:
                 data1 = json.load(f)
 
             # Checking every entry in the file
@@ -519,12 +521,12 @@ async def on_member_update(before: discord.Member, after: discord.Member):
                 # Checking if the User has an entry in the File
                 if member_id_json == id_changed_user:
                     # Deleting the entry
-                    with open("/home/pi/discordbot/Red Card.json", "r") as f:
+                    with open("/home/pi/discordbot/red_card.json", "r") as f:
                         data = json.load(f)
 
                         data["timers"].pop(f"{data1['timers'][content]['member_name']}")
 
-                    with open("/home/pi/discordbot/Red Card.json", "w") as f:
+                    with open("/home/pi/discordbot/red_card.json", "w") as f:
                         json.dump(data, f, indent=2)
 
                     date_time = datetime.now().strftime("%m/%d/%Y, %H:%M")
@@ -588,10 +590,11 @@ async def on_ready():
     while True:
 
         # Yellow Card Check
-        with open('/home/pi/discordbot/Yellow Card.json', 'r') as f:
+        with open('/home/pi/discordbot/yellow_card.json', 'r') as f:
             data1 = json.load(f)
 
         for content in data1['timers']:
+
             time_str = json.dumps(data1["timers"][content]["date"])
             time_stre = time_str.replace('"', "")
 
@@ -614,12 +617,12 @@ async def on_ready():
                 # Removing the role
                 await member.remove_roles(role)
 
-                with open("/home/pi/discordbot/Yellow Card.json", "r") as f:
+                with open("/home/pi/discordbot/yellow_card.json", "r") as f:
                     data = json.load(f)
 
                     data["timers"].pop(f"{data1['timers'][content]['member_name']}")
 
-                with open("/home/pi/discordbot/Yellow Card.json", "w") as f:
+                with open("/home/pi/discordbot/yellow_card.json", "w") as f:
                     json.dump(data, f, indent=2)
 
                 date_time = datetime.now().strftime("%m/%d/%Y, %H:%M")
@@ -634,10 +637,11 @@ async def on_ready():
         await asyncio.sleep(5)
 
         # Red Card Check
-        with open('/home/pi/discordbot/Red Card.json', 'r') as f:
+        with open('/home/pi/discordbot/red_card.json', 'r') as f:
             data1 = json.load(f)
 
         for content in data1['timers']:
+
             time_str = json.dumps(data1["timers"][content]["date"])
             time_stre = time_str.replace('"', "")
 
@@ -660,12 +664,12 @@ async def on_ready():
                 # Removing the role
                 await member.remove_roles(role)
                 # logging.log(level=60, msg=f"Role has been removed from {data1['timers'][content]['member_name']}")
-                with open("/home/pi/discordbot/Red Card.json", "r") as f:
+                with open("/home/pi/discordbot/red_card.json", "r") as f:
                     data = json.load(f)
 
                     data["timers"].pop(f"{data1['timers'][content]['member_name']}")
 
-                with open("/home/pi/discordbot/Red Card.json", "w") as f:
+                with open("/home/pi/discordbot/red_card.json", "w") as f:
                     json.dump(data, f, indent=2)
 
                 date_time = datetime.now().strftime("%m/%d/%Y, %H:%M")
@@ -684,7 +688,9 @@ async def on_ready():
         with open(path, 'r') as f:
             active_member_jsn = json.load(f)
 
+
         for content in active_member_jsn['timers']:
+
             time_str = json.dumps(active_member_jsn["timers"][content]["last_activity"])
             time_stre = time_str.replace('"', "")
 
@@ -694,25 +700,31 @@ async def on_ready():
 
             totalseconds = timedelta.total_seconds(date_now - date_import)
             if totalseconds >= 1209600.0:
-                # logging.log(level=60,msg="Over 7 Days, beginning of the removal")
+                logging.log(level=60, msg="Over 14 Days, beginning of the removal Active Member")
                 # Converting to Int
                 member_id = int(f"{active_member_jsn['timers'][content]['member_id']}")
 
                 # Defining the Variables
-                guild = bot.get_guild(771495836701425725)
                 role = guild.get_role(1019253945941635302)
-                member = await guild.fetch_member(member_id)
 
-                # Removing the role
-                await member.remove_roles(role)
+                try:
+                    member = await guild.fetch_member(member_id)
 
-                with open(path, "r") as f:
-                    data = json.load(f)
+                    # Removing the role
+                    await member.remove_roles(role)
+                except Exception as e:
+                    error = e.args[0]
 
-                    data["timers"].pop(f"{active_member_jsn['timers'][content]['member_id']}")
+                    logging.log(level=60, msg="User is no Member of the Streamunity Server anymore, deleting from file.")
 
-                with open(path, "w") as f:
-                    json.dump(data, f, indent=2)
+                finally:
+                    with open(path, "r") as f:
+                        data = json.load(f)
+
+                        data["timers"].pop(f"{active_member_jsn['timers'][content]['member_id']}")
+
+                    with open(path, "w") as f:
+                        json.dump(data, f, indent=2)
 
         await asyncio.sleep(21600)
 
@@ -727,7 +739,7 @@ async def on_raw_reaction_add(payload):
 
             # Wich Emoji?
             if payload.emoji.name == "Rainbow_six_by_patriotLV":  # Reaction for Role "Rainbow"
-                guild = bot.get_guild(771495836701425725)
+
                 # Defining Variables
                 role = guild.get_role(843921623555768391)
                 member = await guild.fetch_member(payload.member.id)

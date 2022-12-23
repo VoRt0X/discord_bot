@@ -76,3 +76,15 @@ i started to implement a new feature that should "track" if a member is active
 # New feature
 
 - Now only the Member with the "Active User" Role are getting tracked for the active rainbow playing stat
+
+-------------------------------------------------------------------
+                                                                 V 2.4
+-------------------------------------------------------------------
+
+# Bug fixes
+
+- Fixed that the Active Member roles won't be removed, because the first one in the list was someone who wasn't still on the server
+
+# New
+
+- added a new function, where i will specify all the parameters for better overview and management, more coming soon...
