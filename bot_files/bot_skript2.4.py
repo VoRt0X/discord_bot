@@ -14,6 +14,8 @@ intents.messages = True
 intents.presences = True
 manage_guild = True
 manage_roles = True
+view_channel = True
+manage_channels = True
 add_reaction = True
 read_message_history = True
 bot = commands.Bot(command_prefix='>', intents=intents)
